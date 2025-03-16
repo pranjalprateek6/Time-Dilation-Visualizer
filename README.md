@@ -39,7 +39,7 @@ This application is built as a Progressive Web App (PWA), which means you can:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/time-dilation-visualizer.git
+   git clone https://github.com/pranjalprateek6/time-dilation-visualizer.git
    ```
 
 2. Navigate to the project directory:
