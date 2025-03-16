@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Time Dilation Calculator - Visualize relativistic effects">
+    <meta name="theme-color" content="#050505">
+    <title>Time Dilation Visualizer</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/icon.svg">
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="images/icon-16.svg">
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="images/icon-32.svg">
+    <!-- Prevent caching -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!-- Direct CSS link to ensure it loads -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Galaxy Background CSS -->
+    <link rel="stylesheet" href="css/galaxy-background.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- PWA Support -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="images/icon-192.png">
+    <!-- Error handling -->
+    <script>
+        // Global error handler
+        window.onerror = function(message, source, lineno, colno, error) {
+            console.error('JavaScript Error:', message, 'at', source, 'line:', lineno);
+            alert('An error occurred: ' + message + '\nPlease check the console for details.');
+            return true;
+        };
+    </script>
+</head>
+<body class="no-scroll">
+    <!-- Galaxy Background Canvas will be created by JavaScript -->
+    <div id="stars-container"></div>
+    <div id="speed-lines-container"></div>
+    <!-- Black hole and warp effects will be added by JavaScript -->
+    
+    <div class="app-container">
+        <header>
+            <div class="header-content">
+                <h1 class="compact-heading">Time Dilation Visualizer</h1>
+                <p class="tagline compact-tagline">Experience Einstein's relativity in action</p>
+            </div>
+            <div class="header-actions">
+                <a href="explanation.html" class="learn-more-btn" title="Learn about the physics"><i class="fas fa-book"></i> Learn the Physics</a>
+            </div>
+        </header>
+
+        <main class="main-layout">
+            <div class="left-panel">
+                <section class="calculator-section">
+                    <div class="calculator-container">
+                        <h2>Speed Control</h2>
+                        <form id="dilation-form">
+                            <div class="input-group">
+                                <label for="speed-input">Speed (as fraction of c):</label>
+                                <input type="range" id="speed-slider" min="0" max="2" step="0.01" value="0">
+                                <div class="speed-display-container">
+                                    <input type="number" id="speed-input" min="0" max="2" step="0.01" value="0">
+                                    <span class="unit">× c</span>
+                                </div>
+                            </div>
+                            <div class="result-container">
+                                <div class="result-item glow-effect">
+                                    <h3>Lorentz Factor (γ)</h3>
+                                    <div id="lorentz-factor" class="result-value">1.15</div>
+                                </div>
+                                <div class="result-item glow-effect">
+                                    <h3>Time Dilation</h3>
+                                    <div id="time-dilation" class="result-value">
+                                        1 second on Earth = <span id="dilated-time">1.15</span> seconds for the traveler
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section class="mode-indicator-section">
+                    <h2>Speed Modes</h2>
+                    <div class="mode-indicators">
+                        <div class="mode-indicator normal-mode active" data-mode="normal">
+                            <span class="mode-dot"></span>
+                            <div class="mode-info">
+                                <span class="mode-label">Normal</span>
+                                <span class="mode-range">v < c</span>
+                            </div>
+                        </div>
+                        <div class="mode-indicator superluminal-mode" data-mode="superluminal">
+                            <span class="mode-dot"></span>
+                            <div class="mode-info">
+                                <span class="mode-label">Superluminal</span>
+                                <span class="mode-range">c < v < 1.5c</span>
+                            </div>
+                        </div>
+                        <div class="mode-indicator ultra-superluminal-mode" data-mode="ultra">
+                            <span class="mode-dot"></span>
+                            <div class="mode-info">
+                                <span class="mode-label">Ultra-Superluminal</span>
+                                <span class="mode-range">v > 1.5c</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mode-description">
+                        <p id="mode-description-text">
+                            Currently in <span class="mode-name">Normal</span> mode. Time dilation follows Einstein's theory of relativity.
+                        </p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="right-panel">
+                <section class="visualization-section">
+                    <div class="visualization-container">
+                        <div class="clocks-container">
+                            <div class="earth-clock clock">
+                                <h3>Earth Clock</h3>
+                                <div class="clock-face glow-effect" id="earth-clock-face">
+                                    <div class="clock-hand hour-hand" id="earth-hour-hand"></div>
+                                    <div class="clock-hand minute-hand" id="earth-minute-hand"></div>
+                                    <div class="clock-hand second-hand" id="earth-second-hand"></div>
+                                    <div class="clock-center"></div>
+                                    <div class="clock-numbers"></div>
+                                </div>
+                            </div>
+                            <div class="traveler-clock clock">
+                                <h3>Traveler Clock</h3>
+                                <div class="clock-face glow-effect" id="traveler-clock-face">
+                                    <div class="clock-hand hour-hand" id="traveler-hour-hand"></div>
+                                    <div class="clock-hand minute-hand" id="traveler-minute-hand"></div>
+                                    <div class="clock-hand second-hand" id="traveler-second-hand"></div>
+                                    <div class="clock-center"></div>
+                                    <div class="clock-numbers"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ufo-visual-card">
+                            <h3>UFO Speed Visualization</h3>
+                            <div class="ufo-visual-container">
+                                <div class="ufo-visual-scene" id="ufo-visual-scene">
+                                    <div class="ufo-visual-item" id="ufo-visual-normal">
+                                        <div class="ufo-visual-saucer">
+                                            <div class="ufo-visual-dome"></div>
+                                            <div class="ufo-visual-body"></div>
+                                            <div class="ufo-visual-lights"></div>
+                                        </div>
+                                        <div class="ufo-visual-label">Normal Speed (v < c)</div>
+                                        <div class="ufo-visual-stars"></div>
+                                    </div>
+                                    <div class="ufo-visual-item" id="ufo-visual-lightspeed">
+                                        <div class="ufo-visual-saucer">
+                                            <div class="ufo-visual-dome"></div>
+                                            <div class="ufo-visual-body"></div>
+                                            <div class="ufo-visual-lights"></div>
+                                            <div class="ufo-visual-trail"></div>
+                                        </div>
+                                        <div class="ufo-visual-label">Light Speed (v = c)</div>
+                                        <div class="ufo-visual-stars"></div>
+                                    </div>
+                                    <div class="ufo-visual-item" id="ufo-visual-superluminal">
+                                        <div class="ufo-visual-saucer">
+                                            <div class="ufo-visual-dome"></div>
+                                            <div class="ufo-visual-body"></div>
+                                            <div class="ufo-visual-lights"></div>
+                                            <div class="ufo-visual-trail"></div>
+                                        </div>
+                                        <div class="ufo-visual-blackhole"></div>
+                                        <div class="ufo-visual-label">Superluminal (v > c)</div>
+                                        <div class="ufo-visual-stars"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ufo-effects-card">
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <p>Created with 🌐 | <a href="explanation.html">Learn the Physics</a> | <a href="https://github.com/pranjalprateek6/time-dilation-visualizer" target="_blank">View on GitHub</a></p>
+        </footer>
+    </div>
+
+    <!-- Galaxy Background Script -->
+    <script src="js/galaxy-background.js"></script>
+    <!-- Direct script inclusion to ensure it loads -->
+    <script src="js/main.js"></script>
+    <script>
+        // Register service worker for PWA support
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
+        
+        // Update mode description based on speed
+        function updateModeDescription(speed) {
+            const modeDescriptionText = document.getElementById('mode-description-text');
+            const modeIndicators = document.querySelectorAll('.mode-indicator');
+            
+            // Remove active class from all indicators
+            modeIndicators.forEach(indicator => {
+                indicator.classList.remove('active');
+            });
+            
+            let modeName, modeDescription;
+            
+            if (speed >= 1.5) {
+                // Ultra-superluminal
+                modeName = "Ultra-Superluminal";
+                modeDescription = "Exploring exotic physics with imaginary time. This is purely theoretical.";
+                document.querySelector('.mode-indicator[data-mode="ultra"]').classList.add('active');
+            } else if (speed >= 1) {
+                // Superluminal
+                modeName = "Superluminal";
+                modeDescription = "Beyond light speed where time flows backwards. A theoretical visualization.";
+                document.querySelector('.mode-indicator[data-mode="superluminal"]').classList.add('active');
+            } else {
+                // Normal
+                modeName = "Normal";
+                modeDescription = "Time dilation follows Einstein's theory of relativity.";
+                document.querySelector('.mode-indicator[data-mode="normal"]').classList.add('active');
+            }
+            
+            modeDescriptionText.innerHTML = `Currently in <span class="mode-name">${modeName}</span> mode. ${modeDescription}`;
+        }
+        
+        // Add event listener to update mode description when speed changes
+        document.addEventListener('DOMContentLoaded', function() {
+            const speedSlider = document.getElementById('speed-slider');
+            const speedInput = document.getElementById('speed-input');
+            
+            if (speedSlider) {
+                speedSlider.addEventListener('input', function() {
+                    updateModeDescription(parseFloat(this.value));
+                });
+            }
+            
+            if (speedInput) {
+                speedInput.addEventListener('input', function() {
+                    updateModeDescription(parseFloat(this.value));
+                });
+            }
+            
+            // Initial update
+            updateModeDescription(0.5);
+            
+            // Add click event listeners to mode indicators
+            document.querySelectorAll('.mode-indicator').forEach(indicator => {
+                indicator.addEventListener('click', function() {
+                    let targetSpeed;
+                    
+                    switch(this.getAttribute('data-mode')) {
+                        case 'normal':
+                            targetSpeed = 0.5;
+                            break;
+                        case 'superluminal':
+                            targetSpeed = 1.2;
+                            break;
+                        case 'ultra':
+                            targetSpeed = 1.7;
+                            break;
+                        default:
+                            targetSpeed = 0.5;
+                    }
+                    
+                    // Update slider and input values
+                    if (speedSlider) speedSlider.value = targetSpeed;
+                    if (speedInput) speedInput.value = targetSpeed;
+                    
+                    // Trigger the change event
+                    const event = new Event('input');
+                    speedSlider.dispatchEvent(event);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

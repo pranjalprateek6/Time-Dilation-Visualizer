@@ -2,7 +2,7 @@
 
 An interactive web application that visualizes Einstein's theory of relativity and time dilation effects. Experience how time changes at different velocities relative to the speed of light.
 
-![image](https://github.com/user-attachments/assets/3bd13264-8b62-4636-b018-3eadf4710fd3)
+![Time Dilation Visualizer](images/icon-192.png)
 
 ## Features
 
@@ -105,6 +105,16 @@ The Time Dilation Visualizer works best in modern browsers that support the late
 - Firefox
 - Safari
 - Edge
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+The MIT License is a permissive license that allows for reuse with few restrictions. You are free to:
+- Use the software commercially
+- Modify the source code
+- Distribute the software
+- Use and modify the software privately
 
 ## Contributing
 
