@@ -2,9 +2,9 @@
 
 An interactive web application that visualizes Einstein's theory of relativity and time dilation effects. Experience how time changes at different velocities relative to the speed of light.
 
-![Time Dilation Visualizer](images/icon-192.png)
+![image](https://github.com/user-attachments/assets/3bd13264-8b62-4636-b018-3eadf4710fd3)
 
-## 🌟 Features
+## Features
 
 - **Interactive Speed Control**: Adjust velocity from 0 to beyond the speed of light (theoretical visualization)
 - **Real-time Calculations**: See the Lorentz factor and time dilation calculations update instantly
@@ -18,7 +18,7 @@ An interactive web application that visualizes Einstein's theory of relativity a
 - **PWA Support**: Install as a Progressive Web App for offline use
 - **Immersive UI**: Beautiful space-themed interface with animated galaxy background
 
-## 🚀 Technologies Used
+## Technologies Used
 
 - **HTML5/CSS3**: Modern, responsive layout with advanced animations
 - **JavaScript**: Dynamic calculations and interactive elements
@@ -28,18 +28,18 @@ An interactive web application that visualizes Einstein's theory of relativity a
 - **Font Awesome**: For icons
 - **Service Worker**: For offline functionality (PWA)
 
-## 📱 Progressive Web App
+## Progressive Web App
 
 This application is built as a Progressive Web App (PWA), which means you can:
 - Install it on your device
 - Use it offline
 - Get a native app-like experience
 
-## 🔧 Installation & Local Development
+## Installation & Local Development
 
 1. Clone the repository:
    ```
-   git clone https://github.com/pranjalprateek6/time-dilation-visualizer.git
+   git clone https://github.com/yourusername/time-dilation-visualizer.git
    ```
 
 2. Navigate to the project directory:
@@ -69,7 +69,7 @@ This application is built as a Progressive Web App (PWA), which means you can:
 
 4. Open your browser and navigate to `http://localhost:8000` (or whatever port your server is using)
 
-## 🔍 How It Works
+## How It Works
 
 The Time Dilation Visualizer uses the Lorentz factor from Einstein's theory of relativity to calculate how time changes at different velocities. The formula used is:
 
@@ -88,20 +88,39 @@ Where:
 - t is the proper time (time experienced by the stationary observer)
 - γ is the Lorentz factor
 
-## 📚 Learn More
+## Learn More
 
-Visit the "Learn the Physics" page in the application to understand more about Einstein's theory of relativity and time dilation.
+Visit the "Learn the Physics" page in the application to understand more about Einstein's theory of relativity and time dilation. The page includes:
 
-## 📄 License
+- Detailed explanations of special relativity
+- Interactive visualizations of time dilation effects
+- Mathematical formulas with step-by-step breakdowns
+- Real-world examples and applications
+- Links to academic resources for further reading
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Browser Compatibility
 
-## 👨‍💻 Contributing
+The Time Dilation Visualizer works best in modern browsers that support the latest web standards:
+- Chrome (recommended)
+- Firefox
+- Safari
+- Edge
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+## Contributing
 
-## 🙏 Acknowledgements
+Contributions are welcome! Please feel free to submit a Pull Request. Here's how you can contribute:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Acknowledgements
 
 - Einstein's theory of relativity
 - The physics community for making complex concepts accessible
-- Open-source libraries and tools used in this project 
+- Open-source libraries and tools used in this project
+- Font Awesome for the icons
+- GSAP for the smooth animations
+- MathJax for rendering mathematical equations 
