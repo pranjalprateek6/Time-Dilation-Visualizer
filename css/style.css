@@ -1,0 +1,2214 @@
+/* Global Styles */
+:root {
+    --primary-color: #00e5ff;
+    --secondary-color: #ff6584;
+    --tertiary-color: #a259ff;
+    --background-color: #0a0a0a;
+    --surface-color: #121212;
+    --dark-color: #000000;
+    --light-color: #f0f0f0;
+    --gray-color: #9e9e9e;
+    --success-color: #38b000;
+    --border-radius: 12px;
+    --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    --transition: all 0.3s ease;
+    --glow: 0 0 15px rgba(0, 229, 255, 0.4);
+    --superluminal-glow: 0 0 20px rgba(255, 101, 132, 0.5);
+    --ultra-superluminal-glow: 0 0 25px rgba(162, 89, 255, 0.6);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--light-color);
+    background-color: var(--background-color);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 229, 255, 0.05) 0%, transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(255, 101, 132, 0.05) 0%, transparent 30%),
+        linear-gradient(to bottom, var(--background-color), var(--dark-color));
+    background-attachment: fixed;
+    overflow-x: hidden;
+    transition: background-color 1s ease;
+}
+
+/* No scroll for the first page */
+body.no-scroll {
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* App container for full-height layout */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-height: 100vh;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+/* Superluminal state */
+body.superluminal {
+    background-color: var(--dark-color);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 101, 132, 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(255, 101, 132, 0.1) 0%, transparent 30%),
+        linear-gradient(to bottom, #1a0010, var(--dark-color));
+    transition: background-color 0.8s ease, background-image 0.8s ease;
+}
+
+/* Ultra-superluminal state (for speeds > 1.5c) */
+body.ultra-superluminal {
+    background-color: var(--dark-color);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(162, 89, 255, 0.15) 0%, transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(162, 89, 255, 0.15) 0%, transparent 30%),
+        linear-gradient(to bottom, #100030, var(--dark-color));
+    transition: background-color 0.8s ease, background-image 0.8s ease;
+}
+
+body.superluminal .primary-color {
+    color: var(--secondary-color);
+}
+
+body.superluminal .glow-effect {
+    box-shadow: var(--superluminal-glow);
+}
+
+body.ultra-superluminal .primary-color {
+    color: var(--tertiary-color);
+}
+
+body.ultra-superluminal .glow-effect {
+    box-shadow: var(--ultra-superluminal-glow);
+}
+
+/* Stars container */
+#stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Star element */
+.star {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    animation: twinkle 4s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Header links and buttons */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--primary-color);
+    text-shadow: var(--glow);
+}
+
+body.superluminal a {
+    color: var(--secondary-color);
+}
+
+body.superluminal a:hover {
+    color: var(--secondary-color);
+    text-shadow: var(--superluminal-glow);
+}
+
+body.ultra-superluminal a {
+    color: var(--tertiary-color);
+}
+
+body.ultra-superluminal a:hover {
+    color: var(--tertiary-color);
+    text-shadow: var(--ultra-superluminal-glow);
+}
+
+/* Footer links should change with mode */
+footer {
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--gray-color);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+}
+
+footer i {
+    color: var(--secondary-color);
+    margin: 0 0.2rem;
+}
+
+/* Footer links should change with mode */
+footer a {
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+footer a:hover {
+    color: var(--primary-color);
+    text-shadow: var(--glow);
+}
+
+body.superluminal footer a {
+    color: var(--secondary-color);
+}
+
+body.superluminal footer a:hover {
+    color: var(--secondary-color);
+    text-shadow: var(--superluminal-glow);
+}
+
+body.ultra-superluminal footer a {
+    color: var(--tertiary-color);
+}
+
+body.ultra-superluminal footer a:hover {
+    color: var(--tertiary-color);
+    text-shadow: var(--ultra-superluminal-glow);
+}
+
+/* Layout */
+header, footer {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+.header-content {
+    margin-bottom: 1rem;
+}
+
+nav {
+    margin-top: 0.5rem;
+}
+
+/* Learn More button */
+.learn-more-btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: rgba(0, 229, 255, 0.1);
+    border: 1px solid var(--primary-color);
+    border-radius: 30px;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.learn-more-btn:hover {
+    background-color: rgba(0, 229, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 229, 255, 0.2);
+}
+
+body.superluminal .learn-more-btn {
+    background-color: rgba(255, 101, 132, 0.1);
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+body.superluminal .learn-more-btn:hover {
+    background-color: rgba(255, 101, 132, 0.2);
+    box-shadow: 0 4px 8px rgba(255, 101, 132, 0.2);
+}
+
+body.ultra-superluminal .learn-more-btn {
+    background-color: rgba(162, 89, 255, 0.1);
+    border-color: var(--tertiary-color);
+    color: var(--tertiary-color);
+}
+
+body.ultra-superluminal .learn-more-btn:hover {
+    background-color: rgba(162, 89, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(162, 89, 255, 0.2);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    text-shadow: var(--glow);
+}
+
+body.superluminal h1 {
+    color: var(--secondary-color);
+    text-shadow: var(--superluminal-glow);
+}
+
+body.ultra-superluminal h1 {
+    color: var(--tertiary-color);
+    text-shadow: var(--ultra-superluminal-glow);
+}
+
+.tagline {
+    font-size: 1.2rem;
+    color: var(--gray-color);
+    margin-bottom: 1rem;
+}
+
+/* Main layout */
+main.main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    gap: 1.5rem;
+    padding: 0;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.left-panel,
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.left-panel {
+    flex: 0 0 40%;
+    min-width: 300px;
+}
+
+.right-panel {
+    flex: 0 0 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem 3rem 1.5rem 1.5rem;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+/* Sections */
+section {
+    margin-bottom: 2rem;
+    background-color: rgba(18, 18, 18, 0.5);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+}
+
+section:hover {
+    background-color: rgba(18, 18, 18, 0.7);
+    transform: translateY(-2px);
+}
+
+/* Visualization Section */
+.visualization-section {
+    margin: 0;
+    padding: 1.5rem;
+    background-color: rgba(18, 18, 18, 0.5);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.visualization-container {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* Calculator Section */
+.calculator-section {
+    margin: 0;
+    padding: 1.5rem;
+    background-color: rgba(18, 18, 18, 0.5);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.calculator-container {
+    width: 100%;
+}
+
+.calculator-container h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+body.superluminal .calculator-container h2 {
+    color: var(--secondary-color);
+}
+
+body.ultra-superluminal .calculator-container h2 {
+    color: var(--tertiary-color);
+}
+
+#dilation-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input-group {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.result-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+}
+
+.result-item {
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.result-item h3 {
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+    color: var(--gray-color);
+}
+
+.result-value {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--light-color);
+}
+
+/* Slider and input styling */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    margin: 1rem 0;
+    background: rgba(0, 229, 255, 0.2);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    transition: var(--transition);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+    transition: var(--transition);
+    border: none;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
+}
+
+input[type="range"]:hover::-moz-range-thumb {
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
+}
+
+body.superluminal input[type="range"] {
+    background: rgba(255, 101, 132, 0.2);
+}
+
+body.superluminal input[type="range"]::-webkit-slider-thumb {
+    background: var(--secondary-color);
+    box-shadow: 0 0 10px rgba(255, 101, 132, 0.5);
+}
+
+body.superluminal input[type="range"]::-moz-range-thumb {
+    background: var(--secondary-color);
+    box-shadow: 0 0 10px rgba(255, 101, 132, 0.5);
+}
+
+body.ultra-superluminal input[type="range"] {
+    background: rgba(162, 89, 255, 0.2);
+}
+
+body.ultra-superluminal input[type="range"]::-webkit-slider-thumb {
+    background: var(--tertiary-color);
+    box-shadow: 0 0 10px rgba(162, 89, 255, 0.5);
+}
+
+body.ultra-superluminal input[type="range"]::-moz-range-thumb {
+    background: var(--tertiary-color);
+    box-shadow: 0 0 10px rgba(162, 89, 255, 0.5);
+}
+
+.speed-display-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+input[type="number"] {
+    width: 70px;
+    padding: 0.4rem;
+    font-size: 0.9rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    border-radius: var(--border-radius);
+    color: var(--light-color);
+    transition: var(--transition);
+    -moz-appearance: textfield;
+}
+
+input[type="number"]:hover,
+input[type="number"]:focus {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    outline: none;
+}
+
+body.superluminal input[type="number"] {
+    border-color: rgba(255, 101, 132, 0.3);
+}
+
+body.superluminal input[type="number"]:hover,
+body.superluminal input[type="number"]:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 10px rgba(255, 101, 132, 0.3);
+}
+
+body.ultra-superluminal input[type="number"] {
+    border-color: rgba(162, 89, 255, 0.3);
+}
+
+body.ultra-superluminal input[type="number"]:hover,
+body.ultra-superluminal input[type="number"]:focus {
+    border-color: var(--tertiary-color);
+    box-shadow: 0 0 10px rgba(162, 89, 255, 0.3);
+}
+
+.unit {
+    font-size: 0.9rem;
+    color: var(--gray-color);
+    transition: var(--transition);
+}
+
+/* Remove spinner buttons from number input */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Mode Indicator Section */
+.mode-indicator-section {
+    margin: 0;
+    padding: 1.5rem;
+    background-color: rgba(18, 18, 18, 0.5);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mode-indicator-section h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+body.superluminal .mode-indicator-section h2 {
+    color: var(--secondary-color);
+}
+
+body.ultra-superluminal .mode-indicator-section h2 {
+    color: var(--tertiary-color);
+}
+
+.mode-indicators {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    justify-content: space-between;
+}
+
+.mode-indicator {
+    margin: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    border-radius: var(--border-radius);
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+}
+
+.mode-indicator:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.mode-indicator.active {
+    border-color: currentColor;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mode-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: var(--transition);
+}
+
+.normal-mode .mode-dot {
+    background-color: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.superluminal-mode .mode-dot {
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 10px var(--secondary-color);
+}
+
+.ultra-superluminal-mode .mode-dot {
+    background-color: var(--tertiary-color);
+    box-shadow: 0 0 10px var(--tertiary-color);
+}
+
+.mode-info {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.mode-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.normal-mode .mode-label {
+    color: var(--primary-color);
+}
+
+.superluminal-mode .mode-label {
+    color: var(--secondary-color);
+}
+
+.ultra-superluminal-mode .mode-label {
+    color: var(--tertiary-color);
+}
+
+.mode-range {
+    font-size: 0.8rem;
+    color: var(--gray-color);
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.mode-description {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.mode-name {
+    font-weight: 600;
+}
+
+body:not(.superluminal):not(.ultra-superluminal) .mode-name {
+    color: var(--primary-color);
+}
+
+body.superluminal .mode-name {
+    color: var(--secondary-color);
+}
+
+body.ultra-superluminal .mode-name {
+    color: var(--tertiary-color);
+}
+
+/* Clock styling */
+.clock {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.clock h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+/* Earth Clock always cyan */
+.earth-clock h3 {
+    color: var(--primary-color);
+}
+
+.earth-clock .clock-face {
+    border-color: rgba(0, 229, 255, 0.3);
+    box-shadow: var(--glow);
+}
+
+.earth-clock .second-hand {
+    background-color: var(--primary-color);
+}
+
+/* Traveler Clock changes with mode */
+.traveler-clock h3 {
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+body.superluminal .traveler-clock h3 {
+    color: var(--secondary-color);
+}
+
+body.ultra-superluminal .traveler-clock h3 {
+    color: var(--tertiary-color);
+}
+
+.traveler-clock .clock-face {
+    border-color: rgba(0, 229, 255, 0.3);
+    box-shadow: var(--glow);
+    transition: var(--transition);
+}
+
+body.superluminal .traveler-clock .clock-face {
+    border-color: rgba(255, 101, 132, 0.3);
+    box-shadow: var(--superluminal-glow);
+}
+
+body.ultra-superluminal .traveler-clock .clock-face {
+    border-color: rgba(162, 89, 255, 0.3);
+    box-shadow: var(--ultra-superluminal-glow);
+}
+
+.traveler-clock .second-hand {
+    background-color: var(--primary-color);
+    transition: var(--transition);
+}
+
+body.superluminal .traveler-clock .second-hand {
+    background-color: var(--secondary-color);
+}
+
+body.ultra-superluminal .traveler-clock .second-hand {
+    background-color: var(--tertiary-color);
+}
+
+.clock-face {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--glow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.earth-clock .clock-face {
+    border-color: rgba(0, 229, 255, 0.3);
+}
+
+.traveler-clock .clock-face {
+    border-color: rgba(0, 229, 255, 0.3);
+}
+
+.clock-hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    background-color: var(--light-color);
+    border-radius: 10px;
+    transform: translateX(-50%);
+}
+
+.hour-hand {
+    width: 4px;
+    height: 35px;
+    background-color: var(--light-color);
+    z-index: 3;
+}
+
+.minute-hand {
+    width: 3px;
+    height: 50px;
+    background-color: var(--light-color);
+    z-index: 2;
+}
+
+.second-hand {
+    width: 2px;
+    height: 60px;
+    background-color: var(--primary-color);
+    z-index: 1;
+    transition: transform 0.2s cubic-bezier(0.4, 2.08, 0.55, 0.44);
+}
+
+.clock-center {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--light-color);
+    z-index: 4;
+}
+
+.clock-numbers {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.clock-numbers::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: 
+        radial-gradient(circle at 50% 0%, var(--light-color) 2px, transparent 2px),
+        radial-gradient(circle at 100% 50%, var(--light-color) 2px, transparent 2px),
+        radial-gradient(circle at 50% 100%, var(--light-color) 2px, transparent 2px),
+        radial-gradient(circle at 0% 50%, var(--light-color) 2px, transparent 2px),
+        radial-gradient(circle at 85.4% 14.6%, var(--light-color) 2px, transparent 2px),
+        radial-gradient(circle at 85.4% 85.4%, var(--light-color) 2px, transparent 2px),
+        radial-gradient(circle at 14.6% 85.4%, var(--light-color) 2px, transparent 2px),
+        radial-gradient(circle at 14.6% 14.6%, var(--light-color) 2px, transparent 2px);
+}
+
+.clock-details {
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--gray-color);
+}
+
+.clock-time {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--light-color);
+    margin-bottom: 0.3rem;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.clock-date {
+    font-size: 0.8rem;
+}
+
+/* Spaceship styling */
+.spaceship-container {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.spaceship {
+    position: relative;
+    font-size: 2rem;
+    color: var(--light-color);
+    z-index: 2;
+    transition: transform 0.5s ease;
+    animation: moveSpaceship 3s infinite alternate ease-in-out;
+}
+
+.spaceship i {
+    filter: drop-shadow(0 0 5px var(--primary-color));
+    transition: var(--transition);
+}
+
+body.superluminal .spaceship i {
+    filter: drop-shadow(0 0 5px var(--secondary-color));
+}
+
+body.ultra-superluminal .spaceship i {
+    filter: drop-shadow(0 0 5px var(--tertiary-color));
+}
+
+.spaceship-trail {
+    position: absolute;
+    height: 3px;
+    width: 80%;
+    background: linear-gradient(to right, transparent, var(--primary-color));
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    z-index: 1;
+    opacity: 0.6;
+    border-radius: 3px;
+    animation: trailPulse 2s infinite;
+}
+
+body.superluminal .spaceship-trail {
+    background: linear-gradient(to right, transparent, var(--secondary-color));
+    animation: trailPulseFast 1.5s infinite;
+}
+
+body.ultra-superluminal .spaceship-trail {
+    background: linear-gradient(to right, transparent, var(--tertiary-color));
+    animation: trailPulseFaster 1s infinite;
+}
+
+/* Animations */
+@keyframes moveSpaceship {
+    0% {
+        transform: translateX(-20px);
+    }
+    100% {
+        transform: translateX(20px);
+    }
+}
+
+@keyframes trailPulse {
+    0% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+@keyframes trailPulseFast {
+    0% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 0.4;
+    }
+}
+
+@keyframes trailPulseFaster {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .left-panel {
+        flex: 0 0 45%;
+    }
+    
+    .right-panel {
+        flex: 0 0 55%;
+    }
+}
+
+@media (max-width: 992px) {
+    main.main-layout {
+        flex-direction: column;
+    }
+
+    .left-panel,
+    .right-panel {
+        flex: none;
+        width: 100%;
+        max-width: none;
+    }
+
+    .clocks-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #dilation-form {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .input-group, .result-container {
+        width: 100%;
+    }
+    
+    .result-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .result-item {
+        flex: 1 1 calc(50% - 0.4rem);
+        min-width: 200px;
+    }
+
+    .clocks-container {
+        grid-template-columns: 1fr;
+    }
+
+    .ufo-visual-container {
+        height: 300px;
+    }
+    
+    .ufo-visual-scene {
+        flex-direction: column;
+    }
+    
+    .ufo-visual-item {
+        width: 100%;
+        height: 33.33%;
+    }
+    
+    .ufo-visual-label {
+        bottom: 0;
+    }
+
+    .explanation-page {
+        padding: 1rem;
+    }
+    
+    .explanation-page .content {
+        padding: 1.5rem;
+    }
+    
+    .explanation-page h1 {
+        font-size: 1.8rem;
+    }
+    
+    .explanation-page h2 {
+        font-size: 1.3rem;
+    }
+    
+    .explanation-page h3 {
+        font-size: 1.1rem;
+    }
+
+    .calculator-section,
+    .mode-indicator-section,
+    .clock-card,
+    .ufo-speed-card,
+    .ufo-visual-card,
+    .ufo-effects-card,
+    .visualization-section {
+        padding: 1.25rem;
+    }
+
+    .left-panel,
+    .right-panel {
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
+    
+    .right-panel {
+        padding-right: 2.5rem;
+    }
+
+    main.main-layout {
+        gap: 1.25rem;
+    }
+
+    .result-item {
+        padding: 0.6rem;
+    }
+    
+    .result-item h3 {
+        font-size: 0.75rem;
+    }
+    
+    .result-value {
+        font-size: 0.8rem;
+    }
+
+    .clock-card {
+        margin-bottom: 3rem;
+    }
+    
+    .clocks-container {
+        margin-bottom: 3rem;
+    }
+
+    .clock-card::after {
+        bottom: -1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .left-panel,
+    .right-panel {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .right-panel {
+        padding-right: 2rem;
+    }
+
+    .calculator-section,
+    .mode-indicator-section,
+    .clock-card,
+    .ufo-speed-card,
+    .ufo-visual-card,
+    .ufo-effects-card,
+    .visualization-section {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .tagline {
+        font-size: 1rem;
+    }
+    
+    #speed-slider {
+        margin-bottom: 0.5rem;
+    }
+    
+    .clock-face {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .hour-hand {
+        height: 30px;
+    }
+    
+    .minute-hand {
+        height: 45px;
+    }
+    
+    .second-hand {
+        height: 55px;
+    }
+
+    .clock-card {
+        margin-bottom: 2.5rem;
+    }
+    
+    .clocks-container {
+        margin-bottom: 2.5rem;
+    }
+
+    .clock-card::after {
+        bottom: -1.25rem;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .input-group label, button, input[type="number"] {
+        font-size: 1.1rem;
+        padding: 0.7rem;
+    }
+    
+    a:hover {
+        transform: none;
+    }
+    
+    a:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Glow and pulse effects */
+.glow-effect {
+    box-shadow: var(--glow);
+}
+
+body.superluminal .glow-effect {
+    box-shadow: var(--superluminal-glow);
+}
+
+body.ultra-superluminal .glow-effect {
+    box-shadow: var(--ultra-superluminal-glow);
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+body.superluminal .pulse {
+    animation: pulseFast 1.5s infinite;
+}
+
+body.ultra-superluminal .pulse {
+    animation: pulseFaster 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 229, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0);
+    }
+}
+
+@keyframes pulseFast {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 101, 132, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 101, 132, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 101, 132, 0);
+    }
+}
+
+@keyframes pulseFaster {
+    0% {
+        box-shadow: 0 0 0 0 rgba(162, 89, 255, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(162, 89, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(162, 89, 255, 0);
+    }
+}
+
+/* Clocks container for horizontal layout */
+.clocks-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 3.5rem;
+}
+
+.clock {
+    margin: 0;
+}
+
+/* UFO Effects Card */
+.ufo-effects-card {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.ufo-effects-card h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+body.superluminal .ufo-effects-card h3 {
+    color: var(--secondary-color);
+}
+
+body.ultra-superluminal .ufo-effects-card h3 {
+    color: var(--tertiary-color);
+}
+
+.ufo-effect-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ufo-effect-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+}
+
+.ufo-effect-item:hover {
+    transform: translateY(-2px);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ufo-effect-icon {
+    font-size: 1.8rem;
+    margin-right: 1rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#ufo-normal .ufo-effect-icon {
+    color: var(--primary-color);
+}
+
+#ufo-lightspeed .ufo-effect-icon {
+    color: var(--secondary-color);
+}
+
+#ufo-superluminal .ufo-effect-icon {
+    color: var(--tertiary-color);
+}
+
+.ufo-effect-info {
+    flex: 1;
+}
+
+.ufo-effect-info h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: var(--light-color);
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.ufo-effect-info p {
+    font-size: 0.9rem;
+    color: var(--gray-color);
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+/* Active UFO effect state */
+.ufo-effect-item.active {
+    border-color: currentColor;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+#ufo-normal.active {
+    border-color: var(--primary-color);
+}
+
+#ufo-lightspeed.active {
+    border-color: var(--secondary-color);
+}
+
+#ufo-superluminal.active {
+    border-color: var(--tertiary-color);
+}
+
+/* UFO Visual Card */
+.ufo-visual-card {
+    background-color: rgba(18, 18, 18, 0.7);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    width: 100%;
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+    margin-top: 0;
+}
+
+.ufo-visual-card h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+body.superluminal .ufo-visual-card h3 {
+    color: var(--secondary-color);
+}
+
+body.ultra-superluminal .ufo-visual-card h3 {
+    color: var(--tertiary-color);
+}
+
+.ufo-visual-container {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ufo-visual-scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ufo-visual-stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background-image: radial-gradient(2px 2px at 20px 30px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 40px 70px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 60px 110px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 80px 150px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 100px 20px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 120px 50px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 140px 80px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 160px 120px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 180px 30px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 200px 70px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 220px 100px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 240px 130px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 260px 40px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 280px 90px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 300px 160px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 320px 10px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 340px 60px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 360px 140px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 380px 30px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 400px 80px, white, rgba(0, 0, 0, 0)),
+                      radial-gradient(2px 2px at 420px 110px, white, rgba(0, 0, 0, 0));
+    background-repeat: repeat;
+    animation: starsMovement 60s linear infinite;
+}
+
+@keyframes starsMovement {
+    from { background-position: 0 0; }
+    to { background-position: 500px 0; }
+}
+
+.ufo-visual-item {
+    position: relative;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.ufo-visual-item.active {
+    opacity: 1;
+}
+
+.ufo-visual-saucer {
+    position: relative;
+    width: 80px;
+    height: 30px;
+    margin-bottom: 20px;
+}
+
+.ufo-visual-dome {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 15px;
+    background-color: #444;
+    border-radius: 30px 30px 0 0;
+}
+
+.ufo-visual-body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #666;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.ufo-visual-lights {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.ufo-visual-lights::before,
+.ufo-visual-lights::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #fff;
+    animation: ufoLights 1.5s infinite alternate;
+}
+
+@keyframes ufoLights {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.ufo-visual-label {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--light-color);
+}
+
+/* Normal Speed UFO */
+#ufo-visual-normal .ufo-visual-body {
+    background: linear-gradient(to bottom, #888, #555, #333);
+    animation: normalUfoHover 3s ease-in-out infinite;
+}
+
+#ufo-visual-normal .ufo-visual-lights::before {
+    background-color: red;
+}
+
+#ufo-visual-normal .ufo-visual-lights::after {
+    background-color: cyan;
+}
+
+@keyframes normalUfoHover {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Add stars movement for normal speed */
+#ufo-visual-normal + .ufo-visual-stars {
+    animation: starsMovement 60s linear infinite;
+}
+
+/* Light Speed UFO */
+#ufo-visual-lightspeed .ufo-visual-body {
+    background: linear-gradient(to bottom, #ff6666, #cc3333, #990000);
+    animation: lightspeedUfoHover 1.2s ease-in-out infinite;
+}
+
+#ufo-visual-lightspeed .ufo-visual-lights::before {
+    background-color: yellow;
+    animation: lightspeedLights 0.5s infinite alternate;
+}
+
+#ufo-visual-lightspeed .ufo-visual-lights::after {
+    background-color: orange;
+    animation: lightspeedLights 0.5s infinite alternate-reverse;
+}
+
+#ufo-visual-lightspeed .ufo-visual-trail {
+    position: absolute;
+    top: 0;
+    right: -20px;
+    width: 120px;
+    height: 30px;
+    background: linear-gradient(to left, rgba(255, 101, 132, 0), rgba(255, 101, 132, 0.7));
+    border-radius: 0 30px 30px 0;
+    animation: lightspeedTrail 1.2s ease-in-out infinite;
+}
+
+@keyframes lightspeedUfoHover {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-3px) translateX(10px); }
+}
+
+@keyframes lightspeedLights {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.5); }
+}
+
+@keyframes lightspeedTrail {
+    0%, 100% { opacity: 0.7; width: 120px; }
+    50% { opacity: 1; width: 150px; }
+}
+
+/* Faster stars movement for superluminal */
+#ufo-visual-lightspeed + .ufo-visual-stars {
+    animation: starsMovement 20s linear infinite;
+}
+
+/* Superluminal UFO */
+#ufo-visual-superluminal .ufo-visual-body {
+    background: linear-gradient(to bottom, #9966cc, #663399, #330066);
+    animation: superluminalUfoHover 0.8s ease-in-out infinite;
+}
+
+#ufo-visual-superluminal .ufo-visual-lights::before {
+    background-color: #a259ff;
+    animation: superluminalLights 0.3s infinite alternate;
+}
+
+#ufo-visual-superluminal .ufo-visual-lights::after {
+    background-color: #50c8ff;
+    animation: superluminalLights 0.3s infinite alternate-reverse;
+}
+
+#ufo-visual-superluminal .ufo-visual-trail {
+    position: absolute;
+    top: -15px;
+    right: -30px;
+    width: 180px;
+    height: 60px;
+    background: linear-gradient(to left, rgba(162, 89, 255, 0), rgba(162, 89, 255, 0.8));
+    border-radius: 0 50px 50px 0;
+    animation: superluminalTrail 0.8s ease-in-out infinite;
+}
+
+#ufo-visual-superluminal .ufo-visual-blackhole {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 0, 0, 1) 40%, rgba(50, 0, 80, 0.7) 70%, rgba(50, 0, 80, 0) 100%);
+    animation: blackholeEffect 3s ease-in-out infinite;
+    z-index: -1;
+    box-shadow: 0 0 20px rgba(162, 89, 255, 0.5);
+}
+
+/* Add time reversal clock for ultrasuperluminal */
+#ufo-visual-superluminal::after {
+    content: none;
+}
+
+#ufo-visual-superluminal::before {
+    content: none;
+}
+
+@keyframes superluminalUfoHover {
+    0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+    50% { transform: translateY(-5px) translateX(15px) rotate(8deg); }
+}
+
+@keyframes superluminalLights {
+    0% { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 1; transform: scale(2.5); }
+}
+
+@keyframes superluminalTrail {
+    0%, 100% { opacity: 0.8; width: 180px; }
+    50% { opacity: 1; width: 220px; }
+}
+
+/* Ultra-fast stars movement for ultrasuperluminal, moving in reverse */
+#ufo-visual-superluminal + .ufo-visual-stars {
+    animation: starsMovementReverse 5s linear infinite;
+}
+
+@keyframes starsMovementReverse {
+    from { background-position: 0 0; }
+    to { background-position: -500px 0; }
+}
+
+@keyframes blackholeEffect {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    50% { transform: translate(-50%, -50%) scale(2); opacity: 0.95; }
+}
+
+/* Responsive adjustments for the UFO visual card */
+@media (max-width: 768px) {
+    .ufo-visual-container {
+        height: 300px;
+    }
+    
+    .ufo-visual-scene {
+        flex-direction: column;
+    }
+    
+    .ufo-visual-item {
+        width: 100%;
+        height: 33.33%;
+    }
+    
+    .ufo-visual-label {
+        bottom: 0;
+    }
+}
+
+.compact-heading {
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+}
+
+.compact-tagline {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* Explanation page styles */
+.explanation-page {
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.explanation-page header {
+    margin-bottom: 2rem;
+}
+
+.explanation-page h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.explanation-page .content {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: rgba(18, 18, 18, 0.5);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.explanation-page section {
+    margin-bottom: 3rem;
+    background: none;
+    box-shadow: none;
+    border: none;
+}
+
+.explanation-page h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.explanation-page h3 {
+    font-size: 1.2rem;
+    color: var(--light-color);
+    margin: 1.5rem 0 1rem;
+}
+
+.explanation-page p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    color: var(--light-color);
+    font-size: 1rem;
+}
+
+.explanation-page .formula {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin: 1rem 0;
+    text-align: center;
+    font-family: 'Times New Roman', serif;
+    font-size: 1.2rem;
+}
+
+.explanation-page .note {
+    background-color: rgba(0, 229, 255, 0.1);
+    border-left: 4px solid var(--primary-color);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.explanation-page .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background-color: rgba(0, 229, 255, 0.1);
+    border: 1px solid var(--primary-color);
+    border-radius: 30px;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.explanation-page .back-button:hover {
+    background-color: rgba(108, 99, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .explanation-page {
+        padding: 1rem;
+    }
+    
+    .explanation-page .content {
+        padding: 1.5rem;
+    }
+    
+    .explanation-page h1 {
+        font-size: 1.8rem;
+    }
+    
+    .explanation-page h2 {
+        font-size: 1.3rem;
+    }
+    
+    .explanation-page h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Clock Card */
+.clock-card {
+    background-color: rgba(18, 18, 18, 0.5);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 3.5rem;
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+/* Add a visual divider after the clock card */
+.clock-card::after {
+    content: '';
+    position: absolute;
+    bottom: -1.75rem;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    opacity: 0.3;
+}
+
+body.superluminal .clock-card::after {
+    background: linear-gradient(to right, transparent, var(--secondary-color), transparent);
+}
+
+body.ultra-superluminal .clock-card::after {
+    background: linear-gradient(to right, transparent, var(--tertiary-color), transparent);
+}
+
+/* Restore the missing clock-card h2 styles */
+.clock-card h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+body.superluminal .clock-card h2 {
+    color: var(--secondary-color);
+}
+
+body.ultra-superluminal .clock-card h2 {
+    color: var(--tertiary-color);
+}
+
+/* Clocks container for horizontal layout */
+.clocks-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+/* UFO Speed Visualization Card */
+.ufo-speed-card {
+    background-color: rgba(18, 18, 18, 0.5);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ufo-speed-card h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+body.superluminal .ufo-speed-card h2 {
+    color: var(--secondary-color);
+}
+
+body.ultra-superluminal .ufo-speed-card h2 {
+    color: var(--tertiary-color);
+}
+
+/* Right panel layout adjustments */
+.right-panel > * {
+    margin: 0;
+}
+
+/* Responsive adjustments for mode indicators */
+@media (max-width: 480px) {
+    .mode-indicators {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .mode-indicator {
+        width: 100%;
+    }
+}
+
+/* Standardized card heading styles */
+.calculator-section h2,
+.mode-indicator-section h2,
+.clock-card h2,
+.ufo-speed-card h2,
+.ufo-visual-card h3,
+.ufo-effects-card h3,
+.visualization-section h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+body.superluminal .calculator-section h2,
+body.superluminal .mode-indicator-section h2,
+body.superluminal .clock-card h2,
+body.superluminal .ufo-speed-card h2,
+body.superluminal .ufo-visual-card h3,
+body.superluminal .ufo-effects-card h3,
+body.superluminal .visualization-section h2 {
+    color: var(--secondary-color);
+}
+
+body.ultra-superluminal .calculator-section h2,
+body.ultra-superluminal .mode-indicator-section h2,
+body.ultra-superluminal .clock-card h2,
+body.ultra-superluminal .ufo-speed-card h2,
+body.ultra-superluminal .ufo-visual-card h3,
+body.ultra-superluminal .ufo-effects-card h3,
+body.ultra-superluminal .visualization-section h2 {
+    color: var(--tertiary-color);
+}
+
+/* Time Reversal Indicator */
+.time-reversal-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(162, 89, 255, 0.3);
+    border: 1px solid rgba(162, 89, 255, 0.7);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    color: #fff;
+    animation: pulseTimeReversal 1.5s infinite alternate;
+    z-index: 10;
+}
+
+.time-reversal-indicator span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+@keyframes pulseTimeReversal {
+    0% { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.1); }
+}
+
+#ufo-visual-superluminal .time-reversal-clock {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 10px rgba(162, 89, 255, 0.8);
+    z-index: 5;
+    overflow: visible;
+}
+
+#ufo-visual-superluminal .time-reversal-hand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transform-origin: 0% 50%;
+    animation: reverseClockHand 1s linear infinite reverse;
+    box-shadow: 0 0 5px rgba(162, 89, 255, 0.8);
+    z-index: 6;
+}
+
+@keyframes reverseClockHand {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+#ufo-visual-lightspeed .light-speed-clock {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 10px rgba(255, 101, 132, 0.8);
+    z-index: 5;
+    overflow: visible;
+}
+
+#ufo-visual-lightspeed .light-speed-hand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transform-origin: 0% 50%;
+    transform: translateY(-50%) rotate(90deg);
+    box-shadow: 0 0 5px rgba(255, 101, 132, 0.8);
+    z-index: 6;
+    /* No animation - hand is stopped */
+}
+
+/* Pulsing effect for the stopped clock to indicate time has stopped */
+#ufo-visual-lightspeed .light-speed-clock {
+    animation: pulseStoppedClock 2s infinite alternate;
+}
+
+@keyframes pulseStoppedClock {
+    0% { box-shadow: 0 0 5px rgba(255, 101, 132, 0.5); }
+    100% { box-shadow: 0 0 15px rgba(255, 101, 132, 0.9); }
+}
+
+/* Normal speed clock (v < c) */
+#ufo-visual-normal .normal-speed-clock {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.8);
+    z-index: 5;
+    overflow: visible;
+}
+
+#ufo-visual-normal .normal-speed-hand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transform-origin: 0% 50%;
+    animation: normalClockHand 3s linear infinite;
+    box-shadow: 0 0 5px rgba(0, 229, 255, 0.8);
+    z-index: 6;
+}
+
+@keyframes normalClockHand {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* Subtle pulsing effect for the normal clock to indicate time is moving forward but dilated */
+#ufo-visual-normal .normal-speed-clock {
+    animation: pulseNormalClock 3s infinite alternate;
+}
+
+@keyframes pulseNormalClock {
+    0% { box-shadow: 0 0 5px rgba(0, 229, 255, 0.5); }
+    100% { box-shadow: 0 0 10px rgba(0, 229, 255, 0.8); }
+}
+
+/* Further Reading Styles */
+.further-reading {
+    background-color: rgba(10, 10, 20, 0.6);
+    border-left: 3px solid var(--primary-color);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    padding: 1.2rem;
+    margin: 1.5rem 0;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+.further-reading:hover {
+    background-color: rgba(10, 10, 20, 0.8);
+    transform: translateX(5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+}
+
+.further-reading h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.further-reading ul {
+    list-style-type: none;
+    padding-left: 1.5rem;
+}
+
+.further-reading li {
+    margin-bottom: 0.7rem;
+    position: relative;
+}
+
+.further-reading li:before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: -1rem;
+}
+
+.further-reading a {
+    color: var(--light-color);
+    text-decoration: none;
+    transition: var(--transition);
+    border-bottom: 1px dotted var(--gray-color);
+}
+
+.further-reading a:hover {
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+}
+
+/* Different colors for different sections */
+#introduction .further-reading {
+    border-left-color: var(--primary-color);
+}
+
+#special-relativity .further-reading {
+    border-left-color: var(--secondary-color);
+}
+
+#velocity-effects .further-reading {
+    border-left-color: var(--tertiary-color);
+}
+
+#practical-implications .further-reading {
+    border-left-color: var(--success-color);
+}
+
+#general-resources .further-reading {
+    border-left-color: #ffb700;
+}
+
+#introduction .further-reading h4 {
+    color: var(--primary-color);
+}
+
+#special-relativity .further-reading h4 {
+    color: var(--secondary-color);
+}
+
+#velocity-effects .further-reading h4 {
+    color: var(--tertiary-color);
+}
+
+#practical-implications .further-reading h4 {
+    color: var(--success-color);
+}
+
+#general-resources .further-reading h4 {
+    color: #ffb700;
+}
+
+/* Responsive adjustments for further reading */
+@media (max-width: 768px) {
+    .further-reading {
+        padding: 1rem;
+        margin: 1.2rem 0;
+    }
+    
+    .further-reading ul {
+        padding-left: 1rem;
+    }
+    
+    .further-reading li {
+        font-size: 0.9rem;
+    }
+} 
